@@ -28,7 +28,7 @@ export const ThinkingChat: React.FC = () => {
 
       console.log('Sending request to Gemini...');
       const response = await ai.models.generateContent({
-        model: 'gemini-2.0-flash-exp',
+        model: 'gemini-1.5-pro',
         contents: [{ role: 'user', parts: [{ text: userMessage }] }],
       });
 
