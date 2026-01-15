@@ -19,7 +19,7 @@ const App: React.FC = () => {
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-azure-600 rounded flex items-center justify-center font-bold text-white shadow-lg shadow-azure-900/40">S</div>
-            <span className="text-xl font-extrabold tracking-tighter text-slate-200 uppercase">SANJEEV<span className="text-azure-500">KUMAR</span></span>
+            <span className="text-xl font-extrabold tracking-tighter text-slate-200 uppercase">SANJEEV <span className="text-azure-500">KUMAR</span></span>
           </div>
           <div className="hidden md:flex space-x-8 text-sm font-medium text-slate-400">
             <a href="#infrastructure" className="hover:text-azure-400 transition-colors">Infrastructure</a>
@@ -53,7 +53,7 @@ const App: React.FC = () => {
               <p className="text-xl text-slate-400 mb-10 leading-relaxed max-w-2xl font-light">
                 Optimizing and elevating global businesses through next-generation cloud architecture and resilient engineering.
               </p>
-              
+
               <div className="flex flex-wrap gap-3 mb-16">
                 {TECH_STACK.map(tech => (
                   <span key={tech} className="px-4 py-2 bg-slate-900/50 border border-white/5 rounded-md text-slate-300 text-xs font-mono hover:border-azure-500/30 transition-colors">
@@ -78,10 +78,10 @@ const App: React.FC = () => {
               </div>
             </div>
             <div className="lg:w-1/3 w-full">
-               <Terminal />
+              <Terminal />
             </div>
           </div>
-          
+
           <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/3 w-[600px] h-[600px] bg-azure-600/5 rounded-full blur-[120px] -z-10"></div>
         </section>
 
@@ -92,7 +92,7 @@ const App: React.FC = () => {
               <h2 className="text-5xl font-black text-white mb-4 tracking-tighter">THE <span className="text-azure-500">$22B</span> IMPACT.</h2>
               <p className="text-slate-400 max-w-2xl text-lg font-light">High-stakes infrastructure requires absolute resilience. Here is how I deliver scale and stability.</p>
             </div>
-            
+
             <div className="grid md:grid-cols-3 gap-8">
               {IMPACT_STORIES.map((story) => (
                 <div key={story.id} className="group glass p-10 rounded-3xl border-white/5 hover:border-azure-500/30 transition-all hover:bg-slate-900/40">
@@ -129,7 +129,7 @@ const App: React.FC = () => {
 
         {/* Architecture Showcase */}
         <section id="architecture" className="py-24 px-6 relative bg-slate-950/30">
-           <div className="max-w-7xl mx-auto">
+          <div className="max-w-7xl mx-auto">
             <div className="mb-16">
               <h2 className="text-4xl font-black text-white mb-4 tracking-tighter">BATTLE-TESTED BLUEPRINTS.</h2>
               <p className="text-slate-400 max-w-2xl font-light">Deep-dive into the technical foundations of enterprise systems I have architected.</p>
@@ -141,31 +141,31 @@ const App: React.FC = () => {
         {/* AI Innovation Lab */}
         <section id="ailab" className="py-24 px-6 relative bg-slate-900/20">
           <div className="max-w-7xl mx-auto">
-             <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-                <div>
-                  <h2 className="text-5xl font-black text-white mb-4 tracking-tighter uppercase">AI Innovation Lab.</h2>
-                  <p className="text-slate-400 font-light max-w-md">Integrating Generative AI into the modern DevOps lifecycle for smarter automation.</p>
-                </div>
-                <div className="flex flex-wrap gap-2 bg-slate-950/50 p-1 rounded-full border border-white/5">
-                  {[
-                    { id: 'thinking', label: 'Reasoning' },
-                    { id: 'consultant', label: 'Consultant' },
-                    { id: 'edit', label: 'Visualizer' },
-                    { id: 'video', label: 'Motion' }
-                  ].map(tab => (
-                    <button 
-                      key={tab.id}
-                      onClick={() => setActiveLabTab(tab.id as any)}
-                      className={`px-6 py-2 rounded-full text-[10px] uppercase tracking-widest font-bold transition-all ${activeLabTab === tab.id ? 'bg-azure-600 text-white shadow-lg' : 'text-slate-500 hover:text-white'}`}
-                    >
-                      {tab.label}
-                    </button>
-                  ))}
-                </div>
-             </div>
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+              <div>
+                <h2 className="text-5xl font-black text-white mb-4 tracking-tighter uppercase">AI Innovation Lab.</h2>
+                <p className="text-slate-400 font-light max-w-md">Integrating Generative AI into the modern DevOps lifecycle for smarter automation.</p>
+              </div>
+              <div className="flex flex-wrap gap-2 bg-slate-950/50 p-1 rounded-full border border-white/5">
+                {[
+                  { id: 'thinking', label: 'Reasoning' },
+                  { id: 'consultant', label: 'Consultant' },
+                  { id: 'edit', label: 'Visualizer' },
+                  { id: 'video', label: 'Motion' }
+                ].map(tab => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveLabTab(tab.id as any)}
+                    className={`px-6 py-2 rounded-full text-[10px] uppercase tracking-widest font-bold transition-all ${activeLabTab === tab.id ? 'bg-azure-600 text-white shadow-lg' : 'text-slate-500 hover:text-white'}`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+            </div>
 
             <div className="glass rounded-[2rem] p-2 md:p-8 min-h-[500px] border-white/5 shadow-2xl relative overflow-hidden">
-               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-azure-500 to-transparent opacity-20"></div>
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-azure-500 to-transparent opacity-20"></div>
               {activeLabTab === 'thinking' && <ThinkingChat />}
               {activeLabTab === 'consultant' && <CloudConsultant />}
               {activeLabTab === 'edit' && <ImageEditor />}
@@ -189,7 +189,7 @@ const App: React.FC = () => {
               sanjeev123kumar@hotmail.com
             </div>
           </div>
-          
+
           <div className="grid grid-cols-2 gap-20">
             <div>
               <h4 className="text-[10px] uppercase tracking-[0.3em] font-black text-slate-600 mb-6">Platforms</h4>
@@ -202,14 +202,14 @@ const App: React.FC = () => {
               <h4 className="text-[10px] uppercase tracking-[0.3em] font-black text-slate-600 mb-6">Connect</h4>
               <ul className="space-y-4 text-sm text-slate-400 font-medium">
                 <li><a href="mailto:sanjeev123kumar@hotmail.com" className="hover:text-azure-400 transition-colors">Email</a></li>
-                <li><a href="#" className="hover:text-azure-400 transition-colors">Resume</a></li>
+                {/* <li><a href="#" className="hover:text-azure-400 transition-colors">Resume</a></li> */}
               </ul>
             </div>
           </div>
         </div>
         <div className="max-w-7xl mx-auto mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between gap-4 text-[10px] uppercase tracking-[0.2em] font-bold text-slate-600">
-           <div>&copy; 2026 Sanjeev Kumar. DEV NEW YEAR CHALLENGE.</div>
-           <div>BUILD_STATUS: <span className="text-green-500">SUCCESSFUL</span> | INFRA: <span className="text-azure-400">OPTIMIZED</span></div>
+          <div>&copy; 2026 Sanjeev Kumar. DEV NEW YEAR CHALLENGE.</div>
+          <div>BUILD_STATUS: <span className="text-green-500">SUCCESSFUL</span> | INFRA: <span className="text-azure-400">OPTIMIZED</span></div>
         </div>
       </footer>
     </div>

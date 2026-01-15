@@ -23,14 +23,14 @@ export const CAREER_TIMELINE: TimelineEvent[] = [
   },
   {
     year: '2011 - 2015',
-    role: 'Systems Architect',
-    company: 'Technology Solutions',
+    role: 'Senior DevOps Engineer',
+    company: 'Fareportal Pvt. Ltd.',
     description: 'Designed high-availability .NET web applications and integrated automated CI/CD pipelines.'
   },
   {
     year: '2007 - 2011',
     role: 'Software Engineer',
-    company: 'Core Dev Systems',
+    company: 'Excelsoft India Pvt. Ltd.',
     description: 'Foundational experience in full-stack development and server management.'
   }
 ];
@@ -45,10 +45,10 @@ export const IMPACT_STORIES: ImpactStory[] = [
   },
   {
     id: 'resilience-engineering',
-    title: 'Resilience Engineering (Chaos Studio)',
-    metric: '-25% MTTR',
-    description: 'Implemented Azure Chaos Studio to proactively identify system vulnerabilities. This resilience strategy reduced the Mean Time To Recovery by 25%, saving millions in potential downtime costs.',
-    tags: ['Azure Chaos Studio', 'SRE', 'Observability']
+    title: 'BCDR & High Availability Architecture',
+    metric: '99.99% SLA',
+    description: 'Designed and implemented comprehensive Business Continuity and Disaster Recovery strategies across multi-region Azure deployments. Achieved 99.99% uptime SLA with automated failover, geo-redundant backups, and cross-region replication.',
+    tags: ['BCDR', 'High Availability', 'Geo-Redundancy', 'Azure Site Recovery']
   },
   {
     id: 'automation-transformation',
@@ -73,14 +73,26 @@ export const ARCHITECTURES: ArchitectureDiagram[] = [
     description: 'A scalable, multi-tenant hub for energy sector operations, focusing on real-time data processing and cross-region resilience.',
     components: ['Azure Functions', 'Storage Accounts', 'Service Bus', 'App Service'],
     flow: 'Edge Data -> IoT Hub -> Functions -> Service Bus -> SQL Managed Instance'
+  },
+  {
+    id: 'enterprise-products-devops',
+    name: 'Enterprise Products Dual-Track Platform',
+    description: 'Comprehensive DevOps platform managing both Release Track (CI/CD automation with vNext migrations) and Data Track (database lifecycle, cutover orchestration, and test data management).',
+    components: ['Azure DevOps', 'vNext Build', 'SQL Server', 'Test Harness', 'Backup/Restore Automation', 'Data Cleansing Tools'],
+    flow: 'Release: XAML -> vNext Definitions -> Build Pipeline -> Deployment |  Data: Source DB -> Cleansing/Harvesting -> Test Harness -> Cutover'
+  },
+  {
+    id: 'invesco-integration',
+    name: 'Invesco Enterprise Integration Platform',
+    description: 'Enterprise-grade integration system for financial services with automated CI/CD pipeline and scheduled deployment orchestration.',
+    components: ['BizTalk Server', 'SQL Server', 'SSIS', 'Web Services', 'Windows Services', 'CruiseControl'],
+    flow: 'Source Systems -> BizTalk (Orchestration) -> Web/Windows Services -> SSIS (ETL) -> SQL Server'
   }
 ];
 
 export const CERTIFICATIONS: Certification[] = [
   { name: 'Azure Administrator Associate', issuer: 'Microsoft', year: '2023' },
-  { name: 'MCTS: .NET Framework 4, Web Applications', issuer: 'Microsoft', year: '2015' },
-  { name: 'Terraform Associate', issuer: 'HashiCorp', year: '2022' },
-  { name: 'Kubernetes Administrator (CKA)', issuer: 'CNCF', year: '2021' }
+  { name: 'MCTS: .NET Framework 4, Web Applications', issuer: 'Microsoft', year: '2015' }
 ];
 
 export const TECH_STACK = [
