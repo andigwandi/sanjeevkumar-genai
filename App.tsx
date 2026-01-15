@@ -150,8 +150,8 @@ const App: React.FC = () => {
                 {[
                   { id: 'thinking', label: 'Reasoning' },
                   { id: 'consultant', label: 'Consultant' },
-                  { id: 'edit', label: 'Visualizer' },
-                  { id: 'video', label: 'Motion' }
+                  { id: 'edit', label: 'Visualizer' }
+                  // { id: 'video', label: 'Motion' }
                 ].map(tab => (
                   <button
                     key={tab.id}
