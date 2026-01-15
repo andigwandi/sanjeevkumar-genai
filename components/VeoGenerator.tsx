@@ -20,27 +20,31 @@ export const VeoGenerator: React.FC = () => {
   };
 
   const checkAndOpenKey = async () => {
-    // Assuming window.aistudio is globally available per instructions
-    const hasKey = await (window as any).aistudio.hasSelectedApiKey();
-    if (!hasKey) {
-      await (window as any).aistudio.openSelectKey();
+    // Check if running in AI Studio environment
+    if ((window as any).aistudio && typeof (window as any).aistudio.hasSelectedApiKey === 'function') {
+      const hasKey = await (window as any).aistudio.hasSelectedApiKey();
+      if (!hasKey) {
+        await (window as any).aistudio.openSelectKey();
+      }
     }
     return true;
   };
 
   const generateVideo = async () => {
     if (!image || loading) return;
-    
+
     setLoading(true);
     setVideoUrl(null);
     setStatus('Initializing session...');
 
     try {
       await checkAndOpenKey();
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+      const apiKey = process.env.GEMINI_API_KEY || process.env.API_KEY || '';
+      const ai = new GoogleGenAI({ apiKey });
       const base64Data = image.split(',')[1];
 
       setStatus('Submitting video generation task...');
+      // This is using the experimental generateVideos method
       let operation = await ai.models.generateVideos({
         model: 'veo-3.1-fast-generate-preview',
         prompt: prompt || 'Animate the architectural elements with professional motion graphics',
@@ -64,7 +68,7 @@ export const VeoGenerator: React.FC = () => {
       const downloadLink = (operation as any).response?.generatedVideos?.[0]?.video?.uri;
       if (downloadLink) {
         setStatus('Fetching final render...');
-        const response = await fetch(`${downloadLink}&key=${process.env.API_KEY}`);
+        const response = await fetch(`${downloadLink}&key=${apiKey}`);
         const blob = await response.blob();
         setVideoUrl(URL.createObjectURL(blob));
       }
@@ -85,10 +89,10 @@ export const VeoGenerator: React.FC = () => {
       <div className="space-y-6">
         <h3 className="text-xl font-bold text-white">Dynamic Storyteller (Veo)</h3>
         <p className="text-slate-400 text-sm">Transform static system maps into dynamic motion graphics. Use Veo to visualize data flows and infrastructure growth.</p>
-        
+
         <div className="flex space-x-4">
-           <button onClick={() => setAspectRatio('16:9')} className={`flex-1 py-2 text-xs font-mono border rounded-lg transition-all ${aspectRatio === '16:9' ? 'border-azure-500 bg-azure-500/10 text-azure-400' : 'border-white/10 text-slate-500'}`}>LANDSCAPE (16:9)</button>
-           <button onClick={() => setAspectRatio('9:16')} className={`flex-1 py-2 text-xs font-mono border rounded-lg transition-all ${aspectRatio === '9:16' ? 'border-azure-500 bg-azure-500/10 text-azure-400' : 'border-white/10 text-slate-500'}`}>PORTRAIT (9:16)</button>
+          <button onClick={() => setAspectRatio('16:9')} className={`flex-1 py-2 text-xs font-mono border rounded-lg transition-all ${aspectRatio === '16:9' ? 'border-azure-500 bg-azure-500/10 text-azure-400' : 'border-white/10 text-slate-500'}`}>LANDSCAPE (16:9)</button>
+          <button onClick={() => setAspectRatio('9:16')} className={`flex-1 py-2 text-xs font-mono border rounded-lg transition-all ${aspectRatio === '9:16' ? 'border-azure-500 bg-azure-500/10 text-azure-400' : 'border-white/10 text-slate-500'}`}>PORTRAIT (9:16)</button>
         </div>
 
         <div className="relative group">
@@ -120,7 +124,7 @@ export const VeoGenerator: React.FC = () => {
         >
           {loading ? 'RENDERING MOTION...' : 'ANIMATE INFRASTRUCTURE'}
         </button>
-        
+
         <div className="text-[10px] text-slate-500 italic text-center p-2 bg-azure-500/5 border border-azure-500/10 rounded">
           Requires a paid API key for Veo 3.1 access. <a href="https://ai.google.dev/gemini-api/docs/billing" target="_blank" className="underline">Billing Docs</a>
         </div>
@@ -132,11 +136,11 @@ export const VeoGenerator: React.FC = () => {
         ) : (
           <div className="text-center space-y-4">
             {loading ? (
-               <>
-                 <div className="w-12 h-12 border-4 border-azure-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
-                 <p className="text-azure-400 font-mono text-xs uppercase animate-pulse">{status}</p>
-                 <p className="text-slate-500 text-[10px] max-w-xs mx-auto">VEO processing is intensive. Please do not close this session. The architectural motion is being calculated.</p>
-               </>
+              <>
+                <div className="w-12 h-12 border-4 border-azure-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                <p className="text-azure-400 font-mono text-xs uppercase animate-pulse">{status}</p>
+                <p className="text-slate-500 text-[10px] max-w-xs mx-auto">VEO processing is intensive. Please do not close this session. The architectural motion is being calculated.</p>
+              </>
             ) : (
               <span className="text-slate-600 font-mono text-sm uppercase tracking-tighter">Render Queue Empty</span>
             )}

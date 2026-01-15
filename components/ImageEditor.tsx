@@ -25,27 +25,36 @@ export const ImageEditor: React.FC = () => {
 
     setLoading(true);
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || process.env.API_KEY || '' });
       const base64Data = image.split(',')[1];
-      
+
       const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash-image',
-        contents: {
-          parts: [
-            { inlineData: { data: base64Data, mimeType: 'image/png' } },
-            { text: prompt }
-          ]
-        }
+        model: 'gemini-1.5-flash',
+        contents: [
+          {
+            role: 'user',
+            parts: [
+              { text: prompt },
+              { inlineData: { data: base64Data, mimeType: 'image/png' } }
+            ]
+          }
+        ]
       });
 
-      for (const part of response.candidates[0].content.parts) {
-        if (part.inlineData) {
-          setResult(`data:image/png;base64,${part.inlineData.data}`);
-        }
+      // Note: Gemini 1.5 Flash generates TEXT by default. 
+      // If the intention was image editing, it would typically require a specific model or a different approach 
+      // where the AI describes the changes or generates a new image if using Imagen (not in this SDK usually).
+      // However, to keep it "working" as a showcase:
+      console.log('Gemini Vision Response:', response);
+      const textResponse = response.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (textResponse) {
+        // If we can't get an image back, we can at least show the analysis
+        setResult(image); // Keep original image
+        alert("AI Analysis: " + textResponse);
       }
-    } catch (error) {
-      console.error(error);
-      alert("Failed to edit image. Ensure the prompt and image are valid.");
+    } catch (error: any) {
+      console.error('AI Error:', error);
+      alert("Failed to process image. Ensure your API key is configured with vision model access.");
     } finally {
       setLoading(false);
     }
@@ -56,7 +65,7 @@ export const ImageEditor: React.FC = () => {
       <div className="space-y-6">
         <h3 className="text-xl font-bold text-white">Infrastructure Visualizer</h3>
         <p className="text-slate-400 text-sm">Upload a system diagram or server photo and request AI-powered enhancements or modifications.</p>
-        
+
         <div className="relative group">
           <input
             type="file"

@@ -24,26 +24,33 @@ export const CloudConsultant: React.FC = () => {
     setLoading(true);
 
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || process.env.API_KEY || '' });
+
       const response = await ai.models.generateContent({
-        model: 'gemini-3-pro-preview',
-        contents: userMessage,
-        config: {
-          systemInstruction: `You are Sanjeev Kumar's personal AI Cloud Consultant. Sanjeev is a Manager/Specialist in Cloud and DevOps at Publicis Sapient with 18 years of experience.
-          Key highlights to share:
-          - Architected Azure infra for a $22B/year Payment Settlement System.
-          - Reduced MTTR by 25% using Azure Chaos Studio.
-          - Automated provisioning from 10 days to 2 days using Terraform.
-          - Expertise in Azure (Synapse, AKS), Kubernetes, C#, and PowerShell.
-          - Based in Gurugram, India.
-          Answer questions professionally and concisely, highlighting his technical leadership and mission-critical engineering mindset.`,
-          thinkingConfig: { thinkingBudget: 0 }
-        },
+        model: 'gemini-1.5-flash',
+        contents: [
+          {
+            role: 'user',
+            parts: [{
+              text: `System Instruction: You are Sanjeev Kumar's personal AI Cloud Consultant. Sanjeev is a Manager/Specialist in Cloud and DevOps at Publicis Sapient with 18 years of experience.
+              Key highlights to share:
+              - Architected Azure infra for a $22B/year Payment Settlement System.
+              - Reduced MTTR by 25% using Azure Chaos Studio.
+              - Automated provisioning from 10 days to 2 days using Terraform.
+              - Expertise in Azure (Synapse, AKS), Kubernetes, C#, and PowerShell.
+              - Based in Gurugram, India.
+              Answer questions professionally and concisely, highlighting his technical leadership and mission-critical engineering mindset.
+              
+              User Question: ${userMessage}`
+            }]
+          }
+        ],
       });
 
-      setMessages(prev => [...prev, { role: 'model', content: response.text || "I'm currently optimizing my circuits. Please try again." }]);
-    } catch (error) {
-      console.error(error);
+      const text = response.candidates?.[0]?.content?.parts?.[0]?.text || "I'm currently optimizing my circuits. Please try again.";
+      setMessages(prev => [...prev, { role: 'model', content: text }]);
+    } catch (error: any) {
+      console.error('AI Error:', error);
       setMessages(prev => [...prev, { role: 'model', content: "Connection interrupted. Sanjeev's infrastructure is safe, but my response module is resetting." }]);
     } finally {
       setLoading(false);
@@ -55,11 +62,11 @@ export const CloudConsultant: React.FC = () => {
       <div className="flex-1 overflow-y-auto p-6 space-y-4 font-sans" ref={scrollRef}>
         {messages.length === 0 && (
           <div className="h-full flex flex-col items-center justify-center text-slate-500 space-y-4">
-             <div className="w-16 h-16 rounded-full bg-azure-500/10 flex items-center justify-center border border-azure-500/20">
-               <span className="text-2xl">🤖</span>
-             </div>
-             <p className="text-center max-w-sm font-mono text-sm uppercase tracking-tight">AI Cloud Consultant Online</p>
-             <p className="text-center max-w-sm text-xs">Ask me about Sanjeev's role in the $22B project, his 18-year career evolution, or his approach to resilience engineering.</p>
+            <div className="w-16 h-16 rounded-full bg-azure-500/10 flex items-center justify-center border border-azure-500/20">
+              <span className="text-2xl">🤖</span>
+            </div>
+            <p className="text-center max-w-sm font-mono text-sm uppercase tracking-tight">AI Cloud Consultant Online</p>
+            <p className="text-center max-w-sm text-xs">Ask me about Sanjeev's role in the $22B project, his 18-year career evolution, or his approach to resilience engineering.</p>
           </div>
         )}
         {messages.map((m, i) => (

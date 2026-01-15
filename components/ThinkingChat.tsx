@@ -24,19 +24,20 @@ export const ThinkingChat: React.FC = () => {
     setLoading(true);
 
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || process.env.API_KEY || '' });
+
+      console.log('Sending request to Gemini...');
       const response = await ai.models.generateContent({
-        model: 'gemini-3-pro-preview',
-        contents: userMessage,
-        config: {
-          thinkingConfig: { thinkingBudget: 32768 }
-        },
+        model: 'gemini-2.0-flash-exp',
+        contents: [{ role: 'user', parts: [{ text: userMessage }] }],
       });
 
-      setMessages(prev => [...prev, { role: 'model', content: response.text || "No response generated." }]);
-    } catch (error) {
-      console.error(error);
-      setMessages(prev => [...prev, { role: 'model', content: "SYSTEM ERROR: Failed to process complex reasoning request." }]);
+      console.log('Gemini Response:', response);
+      const text = response.candidates?.[0]?.content?.parts?.[0]?.text || "No response generated.";
+      setMessages(prev => [...prev, { role: 'model', content: text }]);
+    } catch (error: any) {
+      console.error('AI Error:', error);
+      setMessages(prev => [...prev, { role: 'model', content: `SYSTEM ERROR: ${error.message || "Failed to process request."}` }]);
     } finally {
       setLoading(false);
     }
@@ -47,10 +48,10 @@ export const ThinkingChat: React.FC = () => {
       <div className="flex-1 overflow-y-auto p-4 space-y-4 font-sans" ref={scrollRef}>
         {messages.length === 0 && (
           <div className="h-full flex flex-col items-center justify-center text-slate-500 space-y-4">
-             <div className="w-16 h-16 rounded-full bg-azure-500/10 flex items-center justify-center border border-azure-500/20">
-               <span className="text-2xl">🧠</span>
-             </div>
-             <p className="text-center max-w-sm">Ask me about complex cloud architectures, cost optimizations, or resilience strategies. I'll use deep reasoning to provide answers.</p>
+            <div className="w-16 h-16 rounded-full bg-azure-500/10 flex items-center justify-center border border-azure-500/20">
+              <span className="text-2xl">🧠</span>
+            </div>
+            <p className="text-center max-w-sm">Ask me about complex cloud architectures, cost optimizations, or resilience strategies. I'll use deep reasoning to provide answers.</p>
           </div>
         )}
         {messages.map((m, i) => (
