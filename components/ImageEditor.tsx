@@ -1,6 +1,5 @@
 
 import React, { useState } from 'react';
-import { GoogleGenAI } from '@google/genai';
 
 export const ImageEditor: React.FC = () => {
   const [image, setImage] = useState<string | null>(null);
@@ -25,36 +24,26 @@ export const ImageEditor: React.FC = () => {
 
     setLoading(true);
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || process.env.API_KEY || '' });
       const base64Data = image.split(',')[1];
-
-      const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash-image',
-        contents: [
-          {
-            role: 'user',
-            parts: [
-              { text: prompt },
-              { inlineData: { data: base64Data, mimeType: 'image/png' } }
-            ]
-          }
-        ]
+      const res = await fetch('/api/ai/image-edit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ base64Data, prompt })
       });
 
-      // Note: Gemini 1.5 Flash generates TEXT by default. 
-      // If the intention was image editing, it would typically require a specific model or a different approach 
-      // where the AI describes the changes or generates a new image if using Imagen (not in this SDK usually).
-      // However, to keep it "working" as a showcase:
-      console.log('Gemini Vision Response:', response);
-      const textResponse = response.candidates?.[0]?.content?.parts?.[0]?.text;
-      if (textResponse) {
-        // If we can't get an image back, we can at least show the analysis
-        setResult(image); // Keep original image
-        alert("AI Analysis: " + textResponse);
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || 'Failed to edit image visual.');
+      }
+
+      if (data.resultImage) {
+        setResult(data.resultImage);
+      } else if (data.text) {
+        alert(`Model generated text note: ${data.text}`);
       }
     } catch (error: any) {
-      console.error('AI Error:', error);
-      alert("Failed to process image. Ensure your API key is configured with vision model access.");
+      console.error(error);
+      alert(error.message || "Failed to edit image. Ensure prompt and image format are valid.");
     } finally {
       setLoading(false);
     }
@@ -65,7 +54,7 @@ export const ImageEditor: React.FC = () => {
       <div className="space-y-6">
         <h3 className="text-xl font-bold text-white">Infrastructure Visualizer</h3>
         <p className="text-slate-400 text-sm">Upload a system diagram or server photo and request AI-powered enhancements or modifications.</p>
-
+        
         <div className="relative group">
           <input
             type="file"

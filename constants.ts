@@ -1,100 +1,219 @@
 
-import { ImpactStory, ArchitectureDiagram, Certification } from './types';
+import { ImpactStory, ArchitectureDiagram, Certification, TimelineEvent, EducationItem, CompetencyCategory } from './types';
 
-export interface TimelineEvent {
-  year: string;
-  role: string;
-  company: string;
-  description: string;
-}
+export const APP_VERSION = "1.2.20260827";
+
+export const PROFILE = {
+  name: "Sanjeev Kumar",
+  title: "Manager / Specialist Cloud & DevOps",
+  subtitle: "Infrastructure & Cloud Architect",
+  experienceYears: "19+",
+  location: "Gurugram, India",
+  phone: "+91 999-905-2147",
+  email: "sanjeev123kumar@hotmail.com",
+  linkedIn: "https://linkedin.com/in/andigwandi",
+  gitHub: "https://github.com/andigwandi",
+  summary: "Result-driven Infrastructure and Cloud Specialist with over 19 years of professional expertise steering DevOps architecture, large-scale cloud migrations, and automation strategies. Proven track record leading infrastructure teams and architecting high-volume, enterprise-grade cloud systems. Microsoft Certified expert adept at designing highly resilient Azure ecosystems, automated CI/CD frameworks, and robust business continuity structures that dramatically accelerate deployment timelines and reduce MTTR."
+};
+
+export const CORE_COMPETENCIES: CompetencyCategory[] = [
+  {
+    category: "Cloud & Orchestration",
+    skills: ["Azure", "Azure Kubernetes Service (AKS)", "Docker", "Bicep", "Terraform", "Ansible"]
+  },
+  {
+    category: "CI/CD & Automation",
+    skills: ["Azure DevOps", "GitLab", "Jenkins", "YAML", "Pipelines as Code"]
+  },
+  {
+    category: "Data & Vector Platforms",
+    skills: ["Milvus Vector DB", "Azure Synapse", "Data Factory", "Cosmos DB", "Redis"]
+  },
+  {
+    category: "Scripting & Development",
+    skills: ["PowerShell", "Bash", "Python", "C#", ".NET Core", "Next.js", "Node.js", "GoLang"]
+  },
+  {
+    category: "Frameworks & Security",
+    skills: ["Secure Private Networking", "BCDR", "PCI Compliance", "Azure Chaos Studio"]
+  }
+];
 
 export const CAREER_TIMELINE: TimelineEvent[] = [
   {
-    year: '2021 - Present',
-    role: 'Manager/Specialist Cloud and DevOps',
+    year: 'Late 2026 – Present',
+    role: 'Manager / Specialist Cloud and DevOps',
     company: 'Publicis Sapient',
-    description: 'Leading mission-critical infrastructure transformations for global financial and energy sectors.'
+    location: 'Gurugram, India',
+    projectName: 'Project: Slingshot',
+    description: 'Leading the Client Services infrastructure team and orchestrating multi-tenant multi-cloud deployment strategies.',
+    highlights: [
+      'Technical Leadership & Client Delivery: Primary technical liaison aligning deployment schedules and release milestones with client and internal project teams.',
+      'Multi-Tenant Deployment Strategy: Managed complex installations and rolling upgrades of Slingshot across Publicis Sapient (PS) and Client Services (CS) hosted multi-cloud environments.',
+      'IaC & Tooling Innovation: Developed custom Terraform blueprints and architected a proprietary GoLang-based installer application for automated bootstrapping.',
+      'Deployment Velocity Optimization: Slashed end-to-end environment fresh installation and provisioning lifecycles by 75%, compressing setup timelines from 10 days down to 2–3 days.'
+    ],
+    skills: ['GoLang', 'Terraform', 'Multi-Cloud', 'AKS', 'Azure DevOps', 'YAML']
   },
   {
-    year: '2015 - 2021',
-    role: 'Senior Cloud Engineer',
+    year: '2021 – 2026',
+    role: 'Manager / Specialist Cloud and DevOps',
     company: 'Publicis Sapient',
-    description: 'Specialized in Azure migrations, IaC with Terraform, and enterprise-scale Kubernetes deployments.'
+    location: 'Gurugram, India',
+    projectName: 'Project: Payment Settlement System',
+    description: 'Architected and engineered production-grade Azure infrastructure supporting a national financial platform processing $22B annually.',
+    highlights: [
+      'Cloud Architecture & Scale: Engineered production-grade Azure infra using Terraform supporting $22 billion in annual financial transactions.',
+      'CI/CD Optimization: Automated pipeline integration across Azure Synapse and Data Factory, driving a 25% acceleration in release cycles.',
+      'Resilience & Chaos Engineering: Implemented Azure Chaos Studio proactive failure testing (Cosmos DB, Azure Functions, Networking), reducing MTTR by 25%.',
+      'Security & PaaS Hardening: Designed secure private networking topologies for Azure PaaS implementations adhering strictly to PCI-DSS standards.',
+      'Orchestration & Governance: Built large-scale AKS clusters powering low-code architectures; mentored cross-functional engineering teams.'
+    ],
+    skills: ['Azure Synapse', 'Data Factory', 'Cosmos DB', 'Azure Chaos Studio', 'PCI-DSS', 'AKS', 'Terraform']
   },
   {
-    year: '2011 - 2015',
-    role: 'Senior DevOps Engineer',
-    company: 'Fareportal Pvt. Ltd.',
-    description: 'Designed high-availability .NET web applications and integrated automated CI/CD pipelines.'
+    year: '2018 – 2021',
+    role: 'Senior Cloud and DevOps Engineer',
+    company: 'Publicis Sapient',
+    location: 'California, USA (Remote)',
+    projectName: 'Project: Digital Hub',
+    description: 'Formulated enterprise configuration blueprints and standardized YAML pipeline infrastructure for high-scale digital platforms.',
+    highlights: [
+      'Infrastructure as Code (IaC): Formulated enterprise configuration blueprints using Ansible, PowerShell, and Azure DevOps for global multi-environment rollouts.',
+      'Shared Service Standardization: Pioneered generic reusable YAML pipeline templates standardizing CI/CD across decentralized client teams.',
+      'Release Acceleration: Designed one-click deployment systems across 30+ critical production environments, mitigating release risk.',
+      'Process Automation: Automated MS Dynamics and SharePoint workspace provisioning workflows, crashing setup timelines from 10 days down to 2 days.'
+    ],
+    skills: ['Ansible', 'PowerShell', 'Azure DevOps', 'YAML Pipelines', 'MS Dynamics', 'SharePoint']
   },
   {
-    year: '2007 - 2011',
-    role: 'Software Engineer',
-    company: 'Excelsoft India Pvt. Ltd.',
-    description: 'Foundational experience in full-stack development and server management.'
+    year: 'April 2014 – September 2015',
+    role: 'Team Lead - Technologies',
+    company: 'Fareportal India',
+    location: 'Gurugram, India',
+    description: 'Managed central build infrastructure and runner farm nodes servicing high-traffic US e-commerce platforms.',
+    highlights: [
+      'Managed central build infrastructure and runner farm nodes for high-volume e-commerce platforms, optimizing high-traffic IIS setups.',
+      'Engineered global CI/CD pipelines using Jenkins and custom MS Deploy automation workflows for 300+ developers.'
+    ],
+    skills: ['Jenkins', 'MS Deploy', 'IIS', 'Runner Farm', 'CI/CD']
+  },
+  {
+    year: 'September 2013 – April 2014',
+    role: 'Sr. Software Engineer - Configuration',
+    company: 'InterGlobe Technologies Pvt. Ltd.',
+    location: 'Gurugram, India',
+    description: 'Developed advanced PowerShell application orchestration scripts to automate installation and reliable rollbacks across server clusters.',
+    highlights: [
+      'Developed advanced PowerShell orchestration scripts automating installation and reliable rollbacks across distributed server clusters.',
+      'Gathered requirements from clients for new product automation and designed tailored automation scripts.'
+    ],
+    skills: ['PowerShell', 'Server Automation', 'Rollback Scripts', 'Configuration Management']
+  },
+  {
+    year: 'February 2010 – September 2013',
+    role: 'Full Stack Developer / Release Engineer',
+    company: 'Excelsoft Technologies',
+    location: 'Noida, India',
+    description: 'Delivered end-to-end enterprise web applications for Pearson India and built automated MSBuild packaging pipelines.',
+    highlights: [
+      'Full-Stack Engineering: Delivered enterprise web applications for Pearson India utilizing C#, ASP.NET, and SQL Server databases.',
+      'Build & Release Automation: Created automated application build packages using MSBuild framework for deployment consistency.',
+      'Process Optimization: Programmed task-automation and health-monitoring scripts (PowerShell, Bash) cutting manual workloads by 10 hours weekly.'
+    ],
+    skills: ['C#', 'ASP.NET', 'SQL Server', 'MSBuild', 'PowerShell', 'Bash']
+  },
+  {
+    year: 'May 2007 – February 2010',
+    role: 'Full Stack Developer',
+    company: 'Aapna Infotheek Pvt. Ltd.',
+    location: 'New Delhi, India',
+    description: 'Developed full-stack .NET business applications taking projects from requirement gathering to production delivery.',
+    highlights: [
+      'Full-Stack Development: Built .NET business applications taking projects from requirement gathering to development and delivery.',
+      'Application Development: Created complex web applications using ASP.NET, C#, SQL Server, jQuery, and CSS.'
+    ],
+    skills: ['ASP.NET', 'C#', 'SQL Server', 'jQuery', 'JavaScript']
   }
 ];
 
 export const IMPACT_STORIES: ImpactStory[] = [
   {
+    id: 'slingshot-automation',
+    title: 'Slingshot Provisioning Velocity',
+    metric: '75% Faster',
+    description: 'Slashed environment installation and provisioning lifecycles from 10 days down to 2–3 days using a proprietary GoLang installer application and modular Terraform blueprints across PS and CS hosted multi-cloud environments.',
+    tags: ['GoLang', 'Terraform', 'Multi-Cloud', 'Slingshot']
+  },
+  {
     id: 'payment-settlement',
-    title: 'The $22B Annual Impact',
+    title: 'National Financial Infrastructure',
     metric: '$22,000,000,000',
-    description: 'Architected the core Azure infrastructure for a Payment Settlement System processing massive global transaction volumes. Prioritized security, compliance, and zero-downtime availability using Terraform and Synapse.',
-    tags: ['Azure Synapse', 'Terraform', 'Financial Tech']
+    description: 'Architected and engineered production-grade Azure infrastructure using Terraform supporting $22 billion in annual financial transactions with automated Azure Synapse & Data Factory pipelines driving a 25% release cycle acceleration.',
+    tags: ['Azure Synapse', 'Data Factory', 'Terraform', 'FinTech']
   },
   {
-    id: 'resilience-engineering',
-    title: 'BCDR & High Availability Architecture',
-    metric: '99.99% SLA',
-    description: 'Designed and implemented comprehensive Business Continuity and Disaster Recovery strategies across multi-region Azure deployments. Achieved 99.99% uptime SLA with automated failover, geo-redundant backups, and cross-region replication.',
-    tags: ['BCDR', 'High Availability', 'Geo-Redundancy', 'Azure Site Recovery']
+    id: 'resilience-chaos',
+    title: 'Resilience Engineering & PCI-DSS',
+    metric: '-25% MTTR',
+    description: 'Implemented proactive failure testing via Azure Chaos Studio across Cosmos DB, Azure Functions, and Private Networking. Reduced Mean Time To Recovery by 25% while enforcing strict PCI-DSS PaaS hardening.',
+    tags: ['Azure Chaos Studio', 'Cosmos DB', 'PCI-DSS', 'AKS']
   },
   {
-    id: 'automation-transformation',
-    title: 'Rapid Environment Provisioning',
-    metric: '80% Faster',
-    description: 'Transformed environment readiness from a 10-day manual process to a 2-day automated workflow. This leap enabled true agile delivery and reduced human error in infrastructure setup.',
-    tags: ['Terraform', 'IaC', 'CI/CD Pipelines']
+    id: 'digital-hub-release',
+    title: 'Digital Hub Workspace Automation',
+    metric: '30+ Prod Envs',
+    description: 'Pioneered reusable YAML pipeline templates and automated MS Dynamics and SharePoint workspace provisioning workflows, crashing setup timelines from 10 days down to 2 days across 30+ critical production environments.',
+    tags: ['Ansible', 'PowerShell', 'YAML Pipelines', 'MS Dynamics']
   }
 ];
 
 export const ARCHITECTURES: ArchitectureDiagram[] = [
   {
+    id: 'slingshot-engine',
+    name: 'Project Slingshot Platform',
+    description: 'Multi-tenant, multi-cloud deployment engine utilizing a custom GoLang bootstrapping installer and modular Terraform blueprints across PS-hosted and CS-hosted client environments.',
+    components: ['GoLang Installer', 'Terraform Blueprints', 'Multi-Cloud AKS', 'Azure DevOps YAML', 'Bicep'],
+    flow: 'Source Code Repo -> Azure DevOps Pipelines -> GoLang Installer App -> Terraform Blueprints -> PS / CS Multi-Cloud Clusters'
+  },
+  {
     id: 'payment-system',
-    name: 'Payment Settlement System',
-    description: 'High-availability architecture designed for financial institutions, prioritizing data integrity and low-latency auditing.',
-    components: ['Azure Synapse', 'AKS', 'Cosmos DB', 'API Management'],
-    flow: 'Client -> APIM -> AKS (Microservices) -> Event Hub -> Synapse (Batch) / Cosmos DB (Live)'
+    name: 'Payment Settlement System ($22B)',
+    description: 'High-availability Azure infrastructure designed for national financial scale, featuring automated Synapse pipelines, AKS microservices, and PCI-DSS private networking.',
+    components: ['Azure Synapse', 'Data Factory', 'AKS', 'Cosmos DB', 'Azure Chaos Studio', 'Private Link'],
+    flow: 'Financial Gateway -> Private Endpoint -> AKS Microservices -> Cosmos DB / Synapse Batch -> Azure Chaos Studio Validation'
   },
   {
     id: 'digital-hub',
-    name: 'Modern Digital Hub',
-    description: 'A scalable, multi-tenant hub for energy sector operations, focusing on real-time data processing and cross-region resilience.',
-    components: ['Azure Functions', 'Storage Accounts', 'Service Bus', 'App Service'],
-    flow: 'Edge Data -> IoT Hub -> Functions -> Service Bus -> SQL Managed Instance'
-  },
-  {
-    id: 'enterprise-products-devops',
-    name: 'Enterprise Products Dual-Track Platform',
-    description: 'Comprehensive DevOps platform managing both Release Track (CI/CD automation with vNext migrations) and Data Track (database lifecycle, cutover orchestration, and test data management).',
-    components: ['Azure DevOps', 'vNext Build', 'SQL Server', 'Test Harness', 'Backup/Restore Automation', 'Data Cleansing Tools'],
-    flow: 'Release: XAML -> vNext Definitions -> Build Pipeline -> Deployment |  Data: Source DB -> Cleansing/Harvesting -> Test Harness -> Cutover'
-  },
-  {
-    id: 'invesco-integration',
-    name: 'Invesco Enterprise Integration Platform',
-    description: 'Enterprise-grade integration system for financial services with automated CI/CD pipeline and scheduled deployment orchestration.',
-    components: ['BizTalk Server', 'SQL Server', 'SSIS', 'Web Services', 'Windows Services', 'CruiseControl'],
-    flow: 'Source Systems -> BizTalk (Orchestration) -> Web/Windows Services -> SSIS (ETL) -> SQL Server'
+    name: 'Digital Hub Multi-Environment Platform',
+    description: 'Standardized YAML pipeline and Ansible configuration system managing 30+ global production environments and automated MS Dynamics workspace provisioning.',
+    components: ['Ansible Playbooks', 'Reusable YAML Templates', 'Azure DevOps', 'PowerShell', 'MS Dynamics'],
+    flow: 'Trigger -> Standardized YAML Pipeline -> Ansible Blueprint -> Multi-Region Cloud Infra / MS Dynamics Provisioning'
   }
 ];
 
 export const CERTIFICATIONS: Certification[] = [
-  { name: 'Azure Administrator Associate', issuer: 'Microsoft', year: '2023' },
-  { name: 'MCTS: .NET Framework 4, Web Applications', issuer: 'Microsoft', year: '2015' }
+  { name: 'Microsoft Certified: Azure Administrator Associate', issuer: 'Microsoft' },
+  { name: 'Microsoft Certified Technology Specialist (.NET 4.0 Web App Dev)', issuer: 'Microsoft' },
+  { name: 'DOEACC: O Level Certified', issuer: 'DOEACC' }
+];
+
+export const EDUCATION: EducationItem[] = [
+  {
+    degree: 'Master of Computer Application (MCA)',
+    period: 'September 2009',
+    institution: 'PTU Jalandhar',
+    grade: '67%'
+  },
+  {
+    degree: 'Bachelor of Science in Information Technology (B.Sc. IT)',
+    period: 'September 2005',
+    institution: 'PTU Jalandhar',
+    grade: '79%'
+  }
 ];
 
 export const TECH_STACK = [
-  'Azure', 'Terraform', 'Kubernetes (AKS)', 'C#', 'PowerShell', 'Synapse', 'Cosmos DB', 'GitHub Actions', 'Next.JS'
+  'Azure', 'AKS', 'Docker', 'Bicep', 'Terraform', 'Ansible', 'Azure DevOps', 'GoLang', 'Milvus Vector DB', 'Azure Synapse', 'Data Factory', 'Cosmos DB', 'Azure Chaos Studio', 'PowerShell', 'C#', '.NET Core', 'Next.js', 'PCI-DSS'
 ];
+

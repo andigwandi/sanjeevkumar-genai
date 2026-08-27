@@ -3,5 +3,8 @@
   "description": "High-end developer portfolio for Senior Technology Consultant specializing in Azure Cloud Architecture and DevOps.",
   "requestFramePermissions": [
     "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
   ]
 }
